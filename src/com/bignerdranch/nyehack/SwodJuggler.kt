@@ -1,4 +1,4 @@
-
+package com.bignerdranch.nyehack
 fun main(args: Array<String>){
     var swordsJuggling: Int? = null
     val isJugglingProficient = (1..3).shuffled().last() == 3
@@ -20,7 +20,7 @@ fun main(args: Array<String>){
 fun proficientCheck(swordsJuggling: Int?) {
     swordsJuggling?: throw UnskilledSwordJugglerException()
     // Line below could not get compile
-    // checkNotNull(swordsJuggling { "Player cannot juggle swords" })
+    // checkNotNull(swordsJuggling { "com.bignerdranch.nyehack.Player cannot juggle swords" })
 }
 
-class UnskilledSwordJugglerException() : IllegalStateException("Player cannot juggle swords")
+class UnskilledSwordJugglerException() : IllegalStateException("com.bignerdranch.nyehack.Player cannot juggle swords")
