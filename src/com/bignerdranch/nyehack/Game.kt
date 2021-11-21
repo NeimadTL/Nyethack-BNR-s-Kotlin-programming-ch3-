@@ -1,9 +1,8 @@
 package com.bignerdranch.nyehack
 
 fun main(args: Array<String>){
-    val player = Player()
+    val player = Player("Madrigal")
     player.castFireBall()
-    val inebriationStatus = player.inebriation
     // Aura
     val auraColor = player.auraColor()
     // Player status

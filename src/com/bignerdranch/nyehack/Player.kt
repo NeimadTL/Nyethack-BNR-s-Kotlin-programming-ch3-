@@ -1,23 +1,31 @@
 package com.bignerdranch.nyehack
 
-class Player {
-    var name = "madrigal"
-        get() = field.capitalize()
+import java.io.File
+
+class Player(_name: String, var healthPoints: Int = 100, val isBlessed: Boolean, private val isImmortal: Boolean, var inebriation: String = "") {
+    var name = _name
+        get() = "${field.capitalize()} of $hometown"
         private set(value) {
             field = value.trim()
         }
 
-    var healthPoints = 89
-    val isBlessed = true
-    private val isImmortal = false
+    val hometown = selectHometown()
 
-    var inebriation = ""
+    init {
+        require(healthPoints > 0, {"healthPoints muts be greater than zero"})
+        require(name.isNotBlank(), {"Plalyer must have a name"})
+        var inebriationLevel = (Math.random() * 50).toInt()
+        inebriation = inebriationStatus(inebriationLevel)
+    }
+    constructor(name: String): this(name, isBlessed= true, isImmortal = false){
+        if (name.toLowerCase() == "kar") healthPoints = 40
+    }
 
     fun castFireBall(numFireballs: Int = 2) {
-        var inebriationLevel = 0
+        // var inebriationLevel = 0
         if (numFireballs > 2 ) {
-            inebriationLevel = (Math.random() * 50).toInt()
-            this.inebriation = inebriationStatus(inebriationLevel)
+            // inebriationLevel = (Math.random() * 50).toInt()
+            // inebriation = inebriationStatus(inebriationLevel)
             println("A glass of Fireball springs into existence. (x$numFireballs)")
         }
     }
@@ -49,4 +57,10 @@ class Player {
             in 41..50 -> "t0aSt3d"
             else -> "Game Over"
         }
+
+    private  fun selectHometown() = File("data/towns.txt")
+        .readText()
+        .split("\n")
+        .shuffled()
+        .first()
 }
