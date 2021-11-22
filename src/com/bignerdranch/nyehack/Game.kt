@@ -3,6 +3,10 @@ package com.bignerdranch.nyehack
 fun main(args: Array<String>){
     val player = Player("Madrigal")
     player.castFireBall()
+
+    var currentRoom: Room = TownSquare()
+    println(currentRoom.description())
+    println(currentRoom.load())
     // Aura
     val auraColor = player.auraColor()
     // Player status
