@@ -1,5 +1,6 @@
 package com.bignerdranch.nyehack
 
+import Coordinate
 import java.io.File
 
 class Player(_name: String, var healthPoints: Int = 100, val isBlessed: Boolean, private val isImmortal: Boolean, var inebriation: String = "") {
@@ -10,6 +11,7 @@ class Player(_name: String, var healthPoints: Int = 100, val isBlessed: Boolean,
         }
 
     val hometown = selectHometown()
+    var currentPosition = Coordinate(0, 0)
 
     init {
         require(healthPoints > 0, {"healthPoints muts be greater than zero"})
