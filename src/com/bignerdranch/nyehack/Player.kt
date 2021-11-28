@@ -1,9 +1,11 @@
 package com.bignerdranch.nyehack
 
 import Coordinate
+import Fightable
 import java.io.File
+import java.util.*
 
-class Player(_name: String, var healthPoints: Int = 100, val isBlessed: Boolean, private val isImmortal: Boolean, var inebriation: String = "") {
+class Player(_name: String, override var healthPoints: Int = 100, val isBlessed: Boolean, private val isImmortal: Boolean, var inebriation: String = "") : Fightable {
     var name = _name
         get() = "${field.capitalize()} of $hometown"
         private set(value) {
@@ -65,4 +67,17 @@ class Player(_name: String, var healthPoints: Int = 100, val isBlessed: Boolean,
         .split("\n")
         .shuffled()
         .first()
+
+    override val diceCount = 3
+    override val diceSides = 6
+
+    override fun attack(opponent: Fightable): Int {
+        val damageDealt = if (isBlessed) {
+            damageRoll * 2
+        } else {
+            damageRoll
+        }
+        opponent.healthPoints -= damageDealt
+        return damageDealt
+    }
 }
